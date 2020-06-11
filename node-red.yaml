@@ -1,27 +1,15 @@
-################################################################################
+##########################################################
 ## Node-RED Stack or Compose
-#################################################################################
-## docker stack deploy node-red --compose-file docker-compose-node-red.yml
-## docker-compose -f docker-compose-node-red.yml -p myNoderedProject up
 
-#################################################################################
-
-version: "3.7"
+version: "2"
 
 services:
-  node-red:
-    image: nodered/node-red:latest
-    #    environment:
-    #   - TZ=Europe/Amsterdam
+
+  nodered:
+    image: dennislaurel/node-red-firebase:0.2
     ports:
-        - 1880:1880
-          #networks:
-          #- node-red-net
+       - 1880:1880
     volumes:
-        - node-red-data
-
-volumes:
-    node-red-data:
-
-          #networks:
-          #node-red-net:
+       - /usr/share/zoneinfo/America/La_Paz:/etc/localtime
+       - /ruote/file:/data
+    restart: unless-stopped
